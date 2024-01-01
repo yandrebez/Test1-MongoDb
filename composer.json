@@ -1,0 +1,11 @@
+{
+    "name": "vendor/test",
+    "description": "MongoDB client Data",
+    "type": "project",
+    "require": {
+        "composer/package-versions-deprecated": "1.11.99.5",
+        "mongodb/mongodb": "^1.15"
+    },
+    "license": "MIT",
+    "minimum-stability": "dev"
+}
