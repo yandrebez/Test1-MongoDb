@@ -56,7 +56,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     }else{
         try{
             $collection->insertOne($documentData);
-            echo("Login was Successful");
+            echo("Sign Up Successful");
             http_response_code(200);
             exit;
         } catch (Exception $e) {
