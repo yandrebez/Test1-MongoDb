@@ -4,15 +4,13 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 
 use MongoDB\Client;
-//use MongoDB\Driver\ServerApi;
+//$connectionString = getenv('MONGODB_CONNECTION_STRING');
+$connectionString = 'mongodb+srv://yandre_localhost:Yandre123@cluster0.ofxuuk9.mongodb.net/';
 
-$connectionString = 'mongodb+srv://yandre_localhost:Yandre123@cluster0.ofxuuk9.mongodb.net/?retryWrites=true&w=majority';
-
-// Specify Stable API version 1
-//$apiVersion = new MongoDB\Driver\ServerApi(MongoDB\Driver\ServerApi::V1);
-
-// Create a new client and connect to the server
-//$client = new Client($uri, [], ['serverApi' => $apiVersion]);
+if (!$connectionString) {
+    // If not set, provide a default value or handle the error accordingly
+    die('MongoDB connection string not set.');
+}
 $client = new Client($connectionString);
 
 $database = $client->selectDatabase('Test1');
@@ -44,12 +42,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     ];
     
 
+    //Prevents users from using special characters or numbers in name/surname field
     if (!preg_match("/^[a-zA-Z'-]+$/", $name) || !preg_match("/^[a-zA-Z'-]+$/", $surname)) {
         echo('Please enter valid characters for name and surname. <a href="form.php">Go Back</a>');
         exit;
     }
 
-    
+    //if the ide number is not exactly = 13 numbers long it will not be accepted
     if(strlen($idNumber )!== 13){
         echo('Please enter a valid ID number. <a href="form.php">Go Back</a>');
         http_response_code(400);

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Form</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <form action="code.php" method="post">
@@ -22,7 +23,7 @@
             </div><br>
             <div>
                 <label for="dateOfBirth">Date of Birth:</label>
-                <input type="date" name="dateOfBirth" id="dateOfBirth">
+                <input type="text" name="dateOfBirth" id="dateOfBirth" pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$" placeholder="DD/MM/YYYY">
             </div><br>
         </div>
         <div>
