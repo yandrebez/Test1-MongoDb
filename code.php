@@ -50,7 +50,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
     //if the ide number is not exactly = 13 numbers long it will not be accepted
     if(strlen($idNumber )!== 13){
-        echo('Please enter a valid ID number. <a href="form.php">Go Back</a>');
+        echo('Please enter a valid ID number. <a href="form.html">Go Back</a>');
         http_response_code(400);
     }else{
         try{
@@ -60,20 +60,24 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
             exit;
         } catch (Exception $e) {
             http_response_code(400);
-            
-            // Handle duplicate key error (ID_Number already exists)
-            // $errorCode = $e->getCode();
-            //  if ($errorCode == 11000) {
-            //      // Redirect or display an error message for duplicate ID_Number
-            echo('There is already an account registired to the provided ID. <a href="form.php">Go Back</a>"');
             //echo($e);
+            echo('<link rel="stylesheet" href="style.css">');
+
+            // Repopulate the form with the user's input
+            echo('<form action="code.php" method="post">');
+            echo('<p>There is already an account registered to the provided ID. Please review and resubmit the form.</p>');
+            echo(' <label for="firstName">Name:</label>');
+            echo('<input type="text" name="firstName" value="' . htmlspecialchars($name) . '" />');
+            echo('<label for="surname">Surname:</label>');
+            echo('<input type="text" name="surname" value="' . htmlspecialchars($surname) . '" />');
+            echo('<label for="idNumber">ID Number:</label>');
+            echo('<input type="number" name="idNumber" value="' . htmlspecialchars($idNumber) . '" minlength="13" maxlength="13" />');
+            echo('<label for="dateOfBirth">Date of Birth:</label>');
+            echo('<input type="text" name="dateOfBirth" value="' . htmlspecialchars($dateOfBirth) . '" pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$" placeholder="DD/MM/YYYY" />');
+            echo('<input type="submit" value="Submit" />');
+            echo('</form>');
+            
             exit;
-            //      } else {
-            //         // Handle other MongoDB exceptions
-            //         // Log the error, display an error message, etc.
-            //         echo("404 error");
-            //         exit;
-            // }
         }
     }
 }else{
